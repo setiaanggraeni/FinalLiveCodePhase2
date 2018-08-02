@@ -19,7 +19,7 @@ class AtricleController {
                     let {title, content, category} = req.body
                     Article.create({title, content, category, author:mongoose.Types.ObjectId(id)}, (err, createdTask) => {
                         if(err) res.json('Wrong access!')
-                        res.status(201).json('Successfully created new article!')
+                        res.status(200).json('Successfully created new article!')
                     })
                 }) 
             }) 
@@ -98,6 +98,20 @@ class AtricleController {
                         res.status(403).json('You dont have access to delete this article!')
                     }
                 })  
+            })
+        }
+    }
+
+    static getOneArticle(req, res){
+        let token = req.headers.token
+        if(!token){
+            res.status(403).json('You have no access token, please login!')
+        } else{
+            Article.findOne({_id : req.params._id})
+            .populate('author')
+            .exec((err, article) => {
+                if(err) res.status(404).json('Article not found!')
+                res.status(200).json(article)
             })
         }
     }
