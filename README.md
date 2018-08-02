@@ -1,6 +1,21 @@
 # FinalLiveCodePhase2
 by Setia Anggraeni
 
+Documentation
+====
+| Routes         | HTTP   | Description                                                |
+|----------------|--------|------------------------------------------------------------|
+| /articles/create              | POST   | Create New Article                          |
+| /articles                     | GET   | Get all articles                             |
+| /articles/:_id                | PUT   | Edit article by ID                           |
+| /articles/:_id                | DELETE   | DELETE article by ID                      |
+| /articles/:_id                | GET   | Get one article by ID                        |
+| /articles/search              | GET   | Search article by author                     |
+| /articles/search/category     | GET   | Search article by category                   |
+| /users/register               | POST   | Register user                               |
+| /users/login                  | POST   | Login user                                  |
+
+
 live-code-phase-2
 
 Hacktivpress - Simple Blogging Platform

@@ -32,10 +32,10 @@ export default {
   props: [],
   methods: {
     login () {
-      this.$router.replace('/login')
+      this.$router.replace('/users/login')
     },
     register () {
-        this.$router.replace('/register')
+        this.$router.replace('/users/register')
     }
   }
 }

@@ -5,12 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config()
 const mongoose = require('mongoose');
+var cors = require('cors')
 
 mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds111012.mlab.com:11012/finallivecodephase2`, { useNewUrlParser: true });
 var usersRouter = require('./routes/index');
 var articlesRouter = require('./routes/articles');
 
 var app = express();
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

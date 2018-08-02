@@ -32,11 +32,10 @@ class AtricleController {
             res.json('Please login to view all articles!')
         } else {
                 Article.find({})
-                .then(theartciles => {
-                    res.status(200).json(theartciles)
-                })
-                .catch(err => {
-                    res.json(err)
+                .populate('author')
+                .exec(function(err, result){
+                    // console.log('ini result ------',result);
+                    res.status(200).json(result)
                 })
         }  
     }
@@ -114,6 +113,48 @@ class AtricleController {
                 res.status(200).json(article)
             })
         }
+    }
+
+    static searchByAuthor(req, res){
+        let token = req.headers.token
+        let q = req.query.q
+        let authorArticles = []
+        console.log('ini q-------',q);
+        
+        if(!token){
+            res.json('Please login to view all articles!')
+        } else {
+            Article.find({})
+            .populate('author')
+            .exec(function(err, result){
+                console.log('ini result ------',result);
+                if(result.author.username === q){
+                    authorArticles.push({title: result.title, category: result.category, content: result.content })
+                    res.status(200).json(authorArticles)
+                }
+            })
+        }  
+    }
+
+    static searchByCategory(req, res){
+        let token = req.headers.token
+        let q = req.query.q
+        let categoryArticles = []
+        console.log('ini q-------',q);
+        
+        if(!token){
+            res.json('Please login to view all articles!')
+        } else {
+            Article.find({})
+            .populate('author')
+            .exec(function(err, result){
+                console.log('ini result ------',result);
+                if(result.author.category === q){
+                    categoryArticles.push({title: result.title, category: result.category, content: result.content })
+                    res.status(200).json(categoryArticles)
+                }
+            })
+        }  
     }
 
 }
